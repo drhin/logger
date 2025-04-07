@@ -126,6 +126,22 @@ func NewDevelopment() (*Logger, error) {
 	)
 }
 
+func NewProduction() (*Logger, error) {
+	return New(
+		WithEnv(Production),
+		WithServiceName(ServerName),
+		WithVersionName(Version),
+		WithRequestKey(RequestKey),
+		WithUserKey(UserKey),
+		WithRotate(true),
+		WithRotatePath("logs/run.log"),
+		WithRotateSize(10),
+		WithRotateAge(30),
+		WithRotateBackups(30),
+		WithRotateCompress(false),
+	)
+}
+
 func New(opts ...Option) (*Logger, error) {
 	l := &Logger{
 		env:            Development,
